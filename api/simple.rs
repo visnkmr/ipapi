@@ -15,8 +15,9 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
         .header("Content-Type", "application/json")
         .body(
             json!({
-              "message": format!("I choose you, {:?}!\n", _req),
-              "message2": format!("I choose you, {:?}!", _req.headers()),
+              "ip": format!("{:?}", _req.headers().get("x-real-ip")),
+              "region": format!("{:?}, {:?}", _req.headers().get("x-vercel-ip-city"),_req.headers().get("x-vercel-ip-country-region")),
+              "GPS": format!("({:?},{:?})", _req.headers().get("x-vercel-ip-latitude"),_req.headers().get("x-vercel-ip-longitude")),
             })
             .to_string()
             .into(),
