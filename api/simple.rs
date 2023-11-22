@@ -15,7 +15,8 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
         .header("Content-Type", "application/json")
         .body(
             json!({
-              "message": format!("I choose you, {}!", starter),
+              "message": format!("I choose you, {:?}!\n", _req),
+              "message2": format!("I choose you, {:?}!", _req.headers()),
             })
             .to_string()
             .into(),
